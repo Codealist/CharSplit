@@ -45,11 +45,11 @@ def split_compound(word):
             # Probability of first compound, given by its ending prob
             if pre_slice_prob == [] and k <= len(pre_slice):
                 end_ngram = pre_slice[-k:]  # Look backwards
-                pre_slice_prob.append(pretrained.ngram_probs.suffix.get(end_ngram, -1))    # Punish unlikely pre_slice end_ngram
+                pre_slice_prob.append(charsplit.pretrained.ngram_probs.suffix.get(end_ngram, -1))    # Punish unlikely pre_slice end_ngram
                     
             # Probability of ngram in word, if high, split unlikely
             in_ngram = word[n:n+k]
-            in_slice_prob.append(pretrained.ngram_probs.infix.get(in_ngram, 1)) # Favor ngrams not occuring within words
+            in_slice_prob.append(charsplit.pretrained.ngram_probs.infix.get(in_ngram, 1)) # Favor ngrams not occuring within words
                                   
             # Probability of word starting
             if start_slice_prob == []:
@@ -58,7 +58,7 @@ def split_compound(word):
                 if ngram.endswith('ts') or ngram.endswith('gs') or ngram.endswith('ks') or ngram.endswith('hls') or ngram.endswith('ns'):
                     if len(ngram[:-1]) > 2:
                         ngram = ngram[:-1] 
-                start_slice_prob.append(pretrained.ngram_probs.prefix.get(ngram, -1))
+                start_slice_prob.append(charsplit.pretrained.ngram_probs.prefix.get(ngram, -1))
 
         if pre_slice_prob == [] or start_slice_prob == []: continue
         

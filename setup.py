@@ -18,7 +18,7 @@ MAINTAINER_EMAIL = 'dvsamchuk@gmail.com'
 URL = 'https://github.com/Codealist/CharSplit'
 LICENSE = 'GNU GPL-3.0'
 DOWNLOAD_URL = 'https://github.com/Codealist/CharSplit/releases'
-VERSION = 'v1.3.5.1'
+VERSION = '1.3.5.1'
 
 try:
     from setuptools import setup
