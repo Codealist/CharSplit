@@ -6,7 +6,6 @@ autor: don.tuggener@gmail.com
 """
 
 import ngram_probs  # trained with char_split_train.py
-import pdb
 import re
 import sys
 
@@ -19,7 +18,7 @@ def split_compound(word):
         except: return [ [1., word,re.sub('.*-','',word)] ]
 
     # Enter encoding nightmare
-    if type(word) is unicode: word = word.encode('utf8').lower() 
+    # if type(word) is unicode: word = word.encode('utf8').lower()
     try: word = word.decode('utf8').lower()
     except: pass
     
@@ -71,7 +70,8 @@ def split_compound(word):
     scores.sort(reverse=True)
     if scores == []: scores=[ [0., word.title(), word.title()] ]
     return sorted(scores, reverse = True)
-                    
+
+
 def test():
     """ Test on Germanet compounds from http://www.sfs.uni-tuebingen.de/lsd/compounds.shtml """
     cases, correct = 0., 0.
@@ -85,9 +85,10 @@ def test():
         head = split_compound(line[0])
         if head != [] and head[0][2].encode('utf8') == line[2]: correct += 1
         #else: print line, head; pdb.set_trace()    # See errors
-        if cases % 10000 == 0: print ' Accuracy (' + str(correct) + '/' + str(cases) + '): ', 100*correct/cases
-    print ' Accuracy (' + str(correct) + '/' + str(cases) + '): ', 100*correct/cases
-    
+        if cases % 10000 == 0: print(' Accuracy (' + str(correct) + '/' + str(cases) + '): ' + 100*correct/cases)
+    print(' Accuracy (' + str(correct) + '/' + str(cases) + '): ' + 100*correct/cases)
+
+
 if __name__ == '__main__':
     """ Print analysis of arg1 """
-    for x in split_compound(sys.argv[1]): print '\t'.join([unicode(y) for y in x])
+    for x in split_compound(sys.argv[1]): print('\t'.join([str(y) for y in x]))

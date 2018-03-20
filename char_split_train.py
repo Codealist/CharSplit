@@ -6,7 +6,6 @@ Take as input a file with one word (a noun) per line (i.e. input.news2012.NN.txt
 autor: don.tuggener@gmail.com
 """
 
-import pdb
 import re
 import sys
 from collections import defaultdict
